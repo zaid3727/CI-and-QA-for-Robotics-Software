@@ -1,2 +1,2 @@
-# ast_ws24
- repository for Advanced Software technologies, for Winter semester 2024, HBRS
+# ast_ss24
+ repository for Advanced Software technologies, for summer semester 2024, HBRS
