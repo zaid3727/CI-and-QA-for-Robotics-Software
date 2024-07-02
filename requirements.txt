@@ -1,6 +1,3 @@
-### Updated `requirements.txt`
-
-```plaintext
 pytest
 py_trees
 # py_trees_ros (Commented out if not available)
