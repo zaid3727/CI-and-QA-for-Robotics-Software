@@ -9,8 +9,6 @@ from geometry_msgs.msg import Twist
 from safety_robile.safety_robile_SMACH  import MonitorBatteryAndCollision, RotateBase, StopBase
 
 class TestStateMachine(unittest.TestCase):
-    # def __init__(self):
-        # self.setUp()
 
     def setUp(self):
         rclpy.init()
@@ -22,9 +20,8 @@ class TestStateMachine(unittest.TestCase):
         node = rclpy.create_node('test_node')
         state = MonitorBatteryAndCollision(node, battery_threshold=50, collision_threshold_distance=1, timeout=5)
 
-        # Simulate low battery by publishing a message
         low_battery_msg = String()
-        low_battery_msg.data = '80.0'  # Set a value below the threshold
+        low_battery_msg.data = '20.0'  # Battery level is 20%
         state.battery_callback(low_battery_msg)
 
         # Run the state
@@ -36,12 +33,10 @@ class TestStateMachine(unittest.TestCase):
         node = rclpy.create_node('test_node')
         state = MonitorBatteryAndCollision(node, battery_threshold=50, collision_threshold_distance=1, timeout=5)
 
-        # Simulate a possible collision by publishing a LaserScan message
         collision_msg = LaserScan()
-        collision_msg.ranges = [0.4, 0.6, 0.7]  # Set a value below the threshold
+        collision_msg.ranges = [1.4, 1.6, 1.7]
         state.laser_scan_callback(collision_msg)
 
-        # Run the state
         outcome = state.execute(None)
 
         self.assertEqual(outcome, 'possible_collision')
@@ -66,5 +61,3 @@ class TestStateMachine(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-    # test_obj = TestStateMachine()
-    # test_obj.test_monitor_battery_and_collision_low_battery()
