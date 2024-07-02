@@ -10,6 +10,11 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.10
+
     - name: Set up ROS 2 Humble
       run: |
         sudo apt update
@@ -20,11 +25,6 @@ jobs:
         sudo apt install -y ros-humble-desktop
         echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
         source ~/.bashrc
-
-    - name: Install Python 3.10
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.10
 
     - name: Install ROS 2 dependencies
       run: |
@@ -41,11 +41,6 @@ jobs:
         pip install pyyaml  # Install pyyaml to handle YAML files
         pip install lark-parser  # Install lark module for parsing
         pip install numpy  # Install numpy for scientific computing
-
-    - name: Build and source ROS 2 packages
-      run: |
-        source /opt/ros/humble/setup.bash
-        colcon build --symlink-install
 
     - name: Run tests
       run: |
