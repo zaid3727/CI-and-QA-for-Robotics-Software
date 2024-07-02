@@ -1,12 +1,12 @@
+### Updated `requirements.txt`
+
+```plaintext
 pytest
 py_trees
-py_trees_ros
+# py_trees_ros (Commented out if not available)
 rclpy
 geometry_msgs
 std_msgs
 sensor_msgs
 smach
-pytest
-py_trees
-# py_trees_ros (Commented out if not available)
 

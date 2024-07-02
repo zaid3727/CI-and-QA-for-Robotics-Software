@@ -13,28 +13,46 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Set up Python 3.10
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.10'
-
-    - name: Install dependencies
+    - name: Set up ROS 2 Humble
       run: |
+        sudo apt update
+        sudo apt install -y curl gnupg2 lsb-release
+        sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
+        sudo sh -c 'echo "deb http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" > /etc/apt/sources.list.d/ros2-latest.list'
+        sudo apt update
+        sudo apt install -y ros-humble-desktop
+        echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
+        source ~/.bashrc
+
+    - name: Set up Python environment
+      run: |
+        python3 -m venv venv
+        source venv/bin/activate
         python -m pip install --upgrade pip
+        pip install pytest
+
+    - name: Install ROS 2 dependencies
+      run: |
+        source /opt/ros/humble/setup.bash
+        sudo apt install -y ros-humble-executive-smach ros-humble-rclpy ros-humble-geometry-msgs ros-humble-std-msgs ros-humble-sensor-msgs
+
+    - name: Install Python dependencies
+      run: |
+        source /opt/ros/humble/setup.bash
+        source venv/bin/activate
         pip install -r requirements.txt
 
     - name: Run tests
       run: |
-        pytest
+        source /opt/ros/humble/setup.bash
+        source venv/bin/activate
+        pytest tests/
 
-    - name: Run Codacy Analysis
+    - name: Debug information
       run: |
-        pip install codacy-coverage
-        coverage run -m pytest
-        coverage xml
-        python-codacy-coverage -r coverage.xml
-      env:
-        CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
+        git config --global --add safe.directory /github/workspace
+        git status
+        ls -la
