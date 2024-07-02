@@ -1,12 +1,6 @@
 name: CI
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+on: [push, pull_request]
 
 jobs:
   build:
@@ -27,12 +21,10 @@ jobs:
         echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
         source ~/.bashrc
 
-    - name: Set up Python environment
-      run: |
-        python3 -m venv venv
-        source venv/bin/activate
-        python -m pip install --upgrade pip
-        pip install pytest
+    - name: Install Python 3.10
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.10
 
     - name: Install ROS 2 dependencies
       run: |
@@ -42,19 +34,21 @@ jobs:
     - name: Install Python dependencies
       run: |
         source /opt/ros/humble/setup.bash
+        python3 -m venv venv
         source venv/bin/activate
+        python -m pip install --upgrade pip
         pip install -r requirements.txt
-        pip install pyyaml
-        pip install lark-parser
+        pip install pyyaml  # Install pyyaml to handle YAML files
+        pip install lark-parser  # Install lark module for parsing
+        pip install numpy  # Install numpy for scientific computing
+
+    - name: Build and source ROS 2 packages
+      run: |
+        source /opt/ros/humble/setup.bash
+        colcon build --symlink-install
 
     - name: Run tests
       run: |
         source /opt/ros/humble/setup.bash
         source venv/bin/activate
         pytest tests/
-
-    - name: Debug information
-      run: |
-        git config --global --add safe.directory /github/workspace
-        git status
-        ls -la
