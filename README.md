@@ -1,6 +1,7 @@
 # AST_SS24
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/456677987e644642b1ceac03558b15ee)](https://app.codacy.com?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+
 [![CI](https://github.com/zaid3727/ast_ss24/actions/workflows/ci.yml/badge.svg)](https://github.com/zaid3727/ast_ss24/actions/workflows/ci.yml)
 
 ## Overview
