@@ -54,6 +54,10 @@ jobs:
     - name: Install coverage
       run: pip install coverage
 
+    - name: Debug PATH
+      run: echo $PATH
+
+
     - name: Run tests
       run: |
         source /opt/ros/humble/setup.bash
