@@ -47,8 +47,6 @@ jobs:
         pip install numpy  # Install numpy for scientific computing
         pip install -r requirements.txt  # Install other dependencies
         sudo apt install rclpy
-        sudo apt install std_msgs
-        sudo apt install sensor_msgs
         sudo apt install ros-humble-executive-smach
         pip install git+https://github.com/splintered-reality/py_trees.git
         pip install git+https://github.com/splintered-reality/py_trees_ros.git

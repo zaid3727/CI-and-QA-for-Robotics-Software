@@ -1,6 +1,4 @@
 pytest
 py_trees
-std_msgs
-sensor_msgs
 smach
 
