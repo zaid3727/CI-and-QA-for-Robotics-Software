@@ -41,7 +41,6 @@ jobs:
         pip install pyyaml  # Install pyyaml to handle YAML files
         pip install lark-parser  # Install lark module for parsing
         pip install numpy  # Install numpy for scientific computing
-        pip install -r requirements.txt
         sudo apt install rclpy
         pip install geometry_msgs
         sudo apt install std_msgs
