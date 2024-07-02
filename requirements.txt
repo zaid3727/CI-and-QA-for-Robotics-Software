@@ -1,4 +1,3 @@
 pytest
 py_trees
-smach
 
