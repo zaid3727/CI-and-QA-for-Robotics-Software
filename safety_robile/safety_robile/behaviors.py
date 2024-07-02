@@ -106,7 +106,7 @@ class stop_motion(pt.behaviour.Behaviour):
         try:
             self.node = kwargs['node']
         except KeyError as e:
-            error_message = "didn't find 'node' in setup's kwargs [{}][{}]".format(self.qualified_name)
+            error_message = f"didn't find 'node' in setup's kwargs [{self.qualified_name}]"
             raise KeyError(error_message) from e  # 'direct cause' traceability
 
         # Create publisher to publish rotation commands
