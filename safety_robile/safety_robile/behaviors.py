@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 
-import py_trees as pt
-import py_trees_ros as ptr
 import rclpy
 from geometry_msgs.msg import Twist
 from std_msgs.msg import Float32
 from sensor_msgs.msg import LaserScan
 from rclpy.qos import QoSProfile, QoSReliabilityPolicy, QoSHistoryPolicy
+import py_trees as pt
+import py_trees_ros as ptr
 
 class rotate(pt.behaviour.Behaviour):
 
@@ -25,7 +25,7 @@ class rotate(pt.behaviour.Behaviour):
         self.topic_name = topic_name
 
         # Set up Maximum allowable rotational velocity
-        self.ang_vel = ang_vel # units: rad/sec
+        self.ang_vel = ang_vel  # units: rad/sec
 
         # Execution checker
         self.sent_goal = False
@@ -36,11 +36,7 @@ class rotate(pt.behaviour.Behaviour):
         """
         self.logger.info("[ROTATE] setting up rotate behavior")
         
-        # try:
         self.node = kwargs['node']
-        # except KeyError as e:
-        #     error_message = "didn't find 'node' in setup's kwargs [{}][{}]".format(self.qualified_name)
-        #     raise KeyError(error_message) from e  # 'direct cause' traceability
 
         # Create publisher to publish rotation commands
         self.cmd_vel_pub = self.node.create_publisher(
@@ -88,7 +84,7 @@ class stop_motion(pt.behaviour.Behaviour):
     """
     Stops the robot when it is controlled using joystick or by cmd_vel command
     """
-    def __init__(self, name: str="stop platform", topic_name: str="/cmd_vel"):
+    def __init__(self, name: str = "stop platform", topic_name: str = "/cmd_vel"):
         """
         One time setup for the behavior which takes less time to execute, and inherited from the parent class
         """        
@@ -161,7 +157,7 @@ class battery_status2bb(ptr.subscribers.ToBlackboard):
     """
     Checking battery status
     """
-    def __init__(self, topic_name: str="/battery_voltage", name: str = 'Battery2BB', threshold: float=30.0):
+    def __init__(self, topic_name: str = "/battery_voltage", name: str = 'Battery2BB', threshold: float = 30.0):
         """
         One time setup for the behavior which takes less time to execute, and inherited from the parent class
         """    
@@ -209,7 +205,7 @@ class laser_scan_2bb(ptr.subscribers.ToBlackboard):
     """
     Checking laser_scan to avoid possible collison
     """
-    def __init__(self, topic_name: str="/scan", name: str = 'Scan2BB', safe_range: float=0.25):
+    def __init__(self, topic_name: str = "/scan", name: str = 'Scan2BB', safe_range: float = 0.25):
         """
         One time setup for the behavior which takes less time to execute, and inherited from the parent class
         """
