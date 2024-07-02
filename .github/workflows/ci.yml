@@ -40,9 +40,10 @@ jobs:
         pip install pyyaml  # Install pyyaml to handle YAML files
         pip install lark-parser  # Install lark module for parsing
         pip install numpy  # Install numpy for scientific computing
+        pip install -r requirements.txt
         pip install git+https://github.com/splintered-reality/py_trees.git
         pip install git+https://github.com/splintered-reality/py_trees_ros.git
-        pip install -r requirements.txt
+
 
     - name: Run tests
       run: |
