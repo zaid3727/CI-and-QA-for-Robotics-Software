@@ -45,6 +45,7 @@ jobs:
         source venv/bin/activate
         pip install -r requirements.txt
         pip install pyyaml
+        pip install lark-parser
 
     - name: Run tests
       run: |
