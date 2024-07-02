@@ -1,0 +1,20 @@
+name: Codacy Analysis
+
+on: [pull_request]
+
+jobs:
+  codacy-analysis:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Run Codacy Analysis
+      run: |
+        pip install codacy-coverage
+        coverage run -m pytest
+        coverage xml
+        python-codacy-coverage -r coverage.xml
+      env:
+        CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
+
