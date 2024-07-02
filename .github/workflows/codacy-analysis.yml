@@ -1,3 +1,53 @@
+# name: Codacy Analysis
+
+# on:
+#   pull_request:
+
+# jobs:
+#   codacy-analysis:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#     - name: Checkout code
+#       uses: actions/checkout@v3
+
+#     - name: Set up Python
+#       uses: actions/setup-python@v3
+#       with:
+#         python-version: "3.x"
+#         cache: "pip"
+
+#     - name: Install ROS dependencies
+#       run: |
+#         sudo apt-get update
+#         sudo apt-get install -y python3-rosdep
+#         rosdep update
+#         rosdep install --from-paths src --ignore-src -r -y
+
+#     - name: Install rclpy
+#       run: |
+#         python -m pip install rclpy
+
+#     - name: Install dependencies
+#       run: |
+#         python -m pip install --upgrade pip
+#         pip install -r requirements.txt
+
+#     - name: Debug PATH
+#       run: echo $PATH
+
+#     - name: Run tests and coverage
+#       run: |
+#         coverage run -m pytest
+#         coverage xml -o coverage.xml
+#       env:
+#         CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
+
+#     - name: Upload coverage to Codacy
+#       run: python-codacy-coverage -r coverage.xml
+#       env:
+#         CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
+
 name: Codacy Analysis
 
 on:
@@ -11,17 +61,20 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Set up Python
-      uses: actions/setup-python@v3
-      with:
-        python-version: "3.x"
-        cache: "pip"
-
-    - name: Install ROS dependencies
+    - name: Setup ROS 2 Sources List
       run: |
+        sudo sh -c 'echo "deb [arch=amd64,arm64] http://packages.ros.org/ros2/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros2-latest.list'
+        sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
         sudo apt-get update
+
+    - name: Install rosdep
+      run: |
         sudo apt-get install -y python3-rosdep
+        sudo rosdep init
         rosdep update
+
+    - name: Install ROS 2 dependencies
+      run: |
         rosdep install --from-paths src --ignore-src -r -y
 
     - name: Install rclpy
@@ -32,9 +85,6 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-
-    - name: Debug PATH
-      run: echo $PATH
 
     - name: Run tests and coverage
       run: |
