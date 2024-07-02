@@ -36,11 +36,11 @@ class rotate(pt.behaviour.Behaviour):
         """
         self.logger.info("[ROTATE] setting up rotate behavior")
         
-        try:
-            self.node = kwargs['node']
-        except KeyError as e:
-            error_message = "didn't find 'node' in setup's kwargs [{}][{}]".format(self.qualified_name)
-            raise KeyError(error_message) from e  # 'direct cause' traceability
+        # try:
+        self.node = kwargs['node']
+        # except KeyError as e:
+        #     error_message = "didn't find 'node' in setup's kwargs [{}][{}]".format(self.qualified_name)
+        #     raise KeyError(error_message) from e  # 'direct cause' traceability
 
         # Create publisher to publish rotation commands
         self.cmd_vel_pub = self.node.create_publisher(
