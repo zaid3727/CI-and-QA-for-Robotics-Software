@@ -42,6 +42,7 @@ jobs:
         pip install lark-parser  # Install lark module for parsing
         pip install numpy  # Install numpy for scientific computing
         pip install -r requirements.txt
+        sudo apt install rclpy
         pip install git+https://github.com/splintered-reality/py_trees.git
         pip install git+https://github.com/splintered-reality/py_trees_ros.git
 

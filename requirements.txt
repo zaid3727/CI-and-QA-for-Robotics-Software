@@ -1,6 +1,5 @@
 pytest
 py_trees
-rclpy
 geometry_msgs
 std_msgs
 sensor_msgs
