@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 
-import py_trees as pt
-import py_trees_ros as ptr
+import sys
 import operator
 
+import py_trees as pt
 import py_trees.console as console
+import py_trees_ros as ptr
 import rclpy
-import sys
+
 from safety_robile.behaviors import *
 
 
@@ -69,23 +70,19 @@ def create_root() -> pt.behaviour.Behaviour:
     """
     Create a node called "Idle", which is a running node to keep the robot idle
     """
-
     idle = pt.behaviours.Running(name="Idle")
 
     """
-    construct the behvior tree structure using the nodes and behaviors defined above
+    Construct the behavior tree structure using the nodes and behaviors defined above
     """
-
     root.add_children([topics2BB, priorities])
-
     topics2BB.add_children([battery2bb, LaserScan2BB])
-
     priorities.add_children([collison_emergency, battery_emergency, idle]) 
-
     battery_emergency.add_children([battery_low, rotate_platform])
     collison_emergency.add_children([is_colliding, stop_platform])
 
     return root
+
 
 def main():
     """
@@ -124,6 +121,7 @@ def main():
     finally:
         tree.shutdown()
         rclpy.try_shutdown()
+
 
 if __name__ == '__main__':
     main()

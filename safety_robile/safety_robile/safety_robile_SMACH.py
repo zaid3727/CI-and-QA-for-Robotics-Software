@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+
+import time
+
 import rclpy
 import smach
 
@@ -7,7 +10,6 @@ from std_msgs.msg import String
 from sensor_msgs.msg import LaserScan
 from geometry_msgs.msg import Twist
 
-import time
 
 class MonitorBatteryAndCollision(smach.State):
     """
@@ -134,5 +136,5 @@ def main(args=None):
 
     rclpy.shutdown()
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
