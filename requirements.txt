@@ -1,6 +1,6 @@
 pytest
 py_trees
-py_trees_ros (Commented out if not available)
+py_trees_ros
 rclpy
 geometry_msgs
 std_msgs
