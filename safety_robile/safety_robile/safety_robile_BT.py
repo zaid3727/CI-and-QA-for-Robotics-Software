@@ -3,10 +3,10 @@
 import sys
 import operator
 
+import rclpy
 import py_trees as pt
 import py_trees.console as console
 import py_trees_ros as ptr
-import rclpy
 
 from safety_robile.behaviors import *
 
