@@ -51,11 +51,6 @@ jobs:
         pip install git+https://github.com/splintered-reality/py_trees.git
         pip install git+https://github.com/splintered-reality/py_trees_ros.git
 
-    - name: Install coverage
-      run: pip install coverage
-
-    - name: Debug PATH
-      run: echo $PATH
 
 
     - name: Run tests
