@@ -52,6 +52,7 @@ jobs:
         pip install -r requirements.txt
         pip install git+https://github.com/splintered-reality/py_trees.git
         pip install git+https://github.com/splintered-reality/py_trees_ros.git
+        pip install -e ./safety_robile
 
     - name: Run tests
       run: |
