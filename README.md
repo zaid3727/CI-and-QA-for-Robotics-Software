@@ -141,9 +141,6 @@ Codacy runs on every PR automatically.
 - [Mohammed Zaid Nidgundi](https://github.com/zaid3727)
 - [Jay Parikh](https://github.com/jp-droid)
 - [Talha Riyaz Shaikh](https://github.com/Talha-Riyaz-Shaikh)
-- 
-- 
-
 ---
 
 ## 📸 Screenshots (Required for Submission)
