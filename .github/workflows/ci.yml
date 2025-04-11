@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04  # ✅ Force the correct OS for ROS2 Humble
 
     steps:
     - name: Checkout repository
@@ -28,7 +28,7 @@ jobs:
         sudo apt install python3-rosdep -y
         echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
         source /opt/ros/humble/setup.bash
-        sudo rosdep init || true  # make idempotent
+        sudo rosdep init || true
         rosdep update
 
     - name: Install ROS 2 dependencies
@@ -40,7 +40,7 @@ jobs:
           ros-humble-geometry-msgs \
           ros-humble-std-msgs \
           ros-humble-sensor-msgs \
-          ros-humble-py-trees-ros-interfaces  
+          ros-humble-py-trees-ros-interfaces
 
     - name: Install Python dependencies
       run: |
@@ -48,9 +48,7 @@ jobs:
         python3 -m venv venv
         source venv/bin/activate
         python -m pip install --upgrade pip
-        pip install pyyaml
-        pip install lark-parser
-        pip install numpy
+        pip install pyyaml lark-parser numpy
         pip install -r requirements.txt
         pip install git+https://github.com/splintered-reality/py_trees.git
         pip install git+https://github.com/splintered-reality/py_trees_ros.git
