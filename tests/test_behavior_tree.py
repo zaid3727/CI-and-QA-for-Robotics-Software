@@ -4,7 +4,7 @@ import py_trees as pt
 from geometry_msgs.msg import Twist
 from std_msgs.msg import Float32
 from sensor_msgs.msg import LaserScan
-from safety_robile.behaviors import rotate, stop_motion, battery_status2bb, laser_scan_2bb  
+from safety_robile.safety_robile.behaviors import rotate, stop_motion, battery_status2bb, laser_scan_2bb
 
 class TestBehaviors(unittest.TestCase):
 
